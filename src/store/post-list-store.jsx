@@ -11,13 +11,13 @@ export const PostList =createContext({postListm:[],
 const postListReducer =(currPostList,action)=>{
    let newPostList = currPostList;
     if(action.type ==="DELETE_POST"){
-   return newPostList.filter((ite) => ite.id !== action.payload.ID)  
+    newPostList.filter((ite) => ite.id !== action.payload.ID)  
     }
     else if(action.type==='CREATE_POST'){
     newPostList= [action.payload,...currPostList]  
      }    
     else if(action.type==='ADD_INITIAL_POST'){
-     return newPostList = action.payload.posts; 
+      newPostList = action.payload.posts; 
  }   
     return newPostList
 }
@@ -25,7 +25,7 @@ const postListReducer =(currPostList,action)=>{
 
 
 const PostListProvider=({children})=>{
-const[postListm,dispatchPostList]=useReducer(postListReducer,Default_v);
+const[postListm,dispatchPostList]=useReducer(postListReducer,[]);
 
 const addInitialPosts=(posts)=>{
     dispatchPostList({
