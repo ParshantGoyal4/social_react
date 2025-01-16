@@ -1,28 +1,34 @@
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './components/HF/Header';
+import Footer from './components/HF/Footer';
+import Sidebar from './components/HF/Sidebar';
+import CreatePost from './components/Subcomponents/CreatePost';
+import PostList from './components/Subcomponents/PostList';
+import { useState } from 'react';
+import PostListProvider from './store/post-list-store';
 
 function App() {
+let [Selectedtab,setSelectedtab]=useState()
+
+function setup(a){
+return setSelectedtab(a)
+}
+
   return (
+    <PostListProvider>
     <div className="App">
-      <header className="App-header">
-        <img src="Octocat.png" className="App-logo" alt="logo" />
-        <p>
-          GitHub Codespaces <span className="heart">♥️</span> React
-        </p>
-        <p className="small">
-          Edit <code>src/App.jsx</code> and save to reload.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </p>
-      </header>
+      <Sidebar Stab = {Selectedtab} Set ={setup}/>
+      <div className="content">
+      <Header/>
+      {Selectedtab !== 'Home'?<PostList/> : <CreatePost/> }
+     
+      
+      <Footer/>
+      </div>
     </div>
+    </PostListProvider>
+    
   );
 }
 
